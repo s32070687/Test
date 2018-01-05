@@ -5,6 +5,7 @@ import android.animation.ObjectAnimator;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -68,19 +69,6 @@ public class GetSeverActivity extends AppCompatActivity {
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
-
-        DisplayMetrics displaymetrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
-
-        Log.d(TAG,displaymetrics.widthPixels + "    螢幕寬");
-
-        float dd = displaymetrics.density;
-        float px = 10 * dd;
-        Common.phoneWidth = (int) (displaymetrics.widthPixels - px);
-        Common.phoneHeight = (int) (displaymetrics.heightPixels - px);
-
-        Log.d(TAG,Common.phoneWidth + "    不同解析度下的新螢幕寬");
-        Log.d(TAG,Common.phoneHeight + "    不同解析度下的新螢幕高");
 
         ItemTouchHelper.Callback mCallback = new ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP|ItemTouchHelper.DOWN|ItemTouchHelper.LEFT|ItemTouchHelper.RIGHT,ItemTouchHelper.ACTION_STATE_IDLE){
             @Override
@@ -152,10 +140,15 @@ public class GetSeverActivity extends AppCompatActivity {
 
     private void GetSever() {
         if (Common.networkConnected(this)) {
+
+            Log.d(TAG,"網路正常開始連線");
+
             dialog = ProgressDialog.show(GetSeverActivity.this,
-                    "讀取中", "請等待...", true);
+                    this.getString(R.string.dialog_loading_01), this.getString(R.string.dialog_loading_02), true);
 
             rvSeverList.setAdapter(new ShowSeverListAdapter(GetSeverActivity.this, testArray));
+
+            dialog.dismiss();
 //            List<ServerList> serverLists = null;
 //
 //            try {
@@ -183,6 +176,7 @@ public class GetSeverActivity extends AppCompatActivity {
 //            }
         }
         else {
+            Log.d(TAG,"網路異常");
             NetWorkError();
         }
     }
@@ -191,9 +185,9 @@ public class GetSeverActivity extends AppCompatActivity {
     public void NetWorkError() {
         new AlertDialog.Builder(GetSeverActivity.this)
                 .setIcon(R.mipmap.ic_launcher_error)
-                .setTitle("連線失敗")
-                .setMessage("連線失敗,請確認網路連線")
-                .setPositiveButton("重新連線", new DialogInterface.OnClickListener() {
+                .setTitle(R.string.dialog_message_01)
+                .setMessage(R.string.dialog_message_02)
+                .setPositiveButton(R.string.dialog_message_03, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Log.d(TAG,"重新連線");
@@ -201,7 +195,7 @@ public class GetSeverActivity extends AppCompatActivity {
                         GetSever();
                     }
                 })
-                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                .setNegativeButton(R.string.dialog_message_04, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Log.d(TAG,"取消");

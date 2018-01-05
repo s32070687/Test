@@ -8,22 +8,10 @@
     android:background="@drawable/gradlient_background"
     tools:context="com.example.jason.test.GetSever.GetSeverActivity">
 
-    <TextView
-        android:layout_gravity="center_horizontal"
-        android:gravity="center"
-        android:textColor="#9AFF02"
-        android:textStyle="bold"
-        android:textSize="20sp"
-        android:text="@string/get_sever_01"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_weight="0.1"/>
-
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefreshLayout"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.9">
+        android:layout_height="match_parent">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rvSeverList"
