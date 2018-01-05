@@ -1,5 +1,8 @@
 package com.example.jason.test.Home;
 
+import android.annotation.TargetApi;
+import android.os.Build;
+import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,9 +17,10 @@ public class TabHomeActivity extends AppCompatActivity {
     private final static String TAG = "TabHomeActivity";
 
     //View元件
-    private ViewPager vpMain;
-    private TableLayout tlMain;
+    private ViewPager vpHome;
+    private TabLayout tlHome;
 
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,8 +31,16 @@ public class TabHomeActivity extends AppCompatActivity {
 
     private void initView() {
 
-        vpMain = (ViewPager)findViewById(R.id.vpMain);
-        tlMain = (TableLayout) findViewById(R.id.tlMain);
+        vpHome = (ViewPager)findViewById(R.id.vpHome);
+        tlHome = (TabLayout) findViewById(R.id.tlHome);
+
+        HomeTabItemFragmentPagerAdapter homeTabItemFragmentPagerAdapter =
+                new  HomeTabItemFragmentPagerAdapter(getSupportFragmentManager());
+
+        vpHome.setAdapter(homeTabItemFragmentPagerAdapter);
+
+        vpHome.setOffscreenPageLimit(0);
+        tlHome.setupWithViewPager(vpHome);
     }
 
     @Override

@@ -11,6 +11,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
 import com.example.jason.test.GetSever.GetSeverActivity;
+import com.example.jason.test.Home.TabHomeActivity;
 import com.example.jason.test.Main.Common;
 
 public class WelcomeActivity extends AppCompatActivity implements Animation.AnimationListener {
@@ -74,7 +75,7 @@ public class WelcomeActivity extends AppCompatActivity implements Animation.Anim
     @Override
     public void onAnimationEnd(Animation animation) {
         //動畫結束
-        startActivity(new Intent(WelcomeActivity.this,GetSeverActivity.class));
+        startActivity(new Intent(WelcomeActivity.this,TabHomeActivity.class));
         finish();
     }
 

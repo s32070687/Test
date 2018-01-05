@@ -2,11 +2,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.jason.test.Home.Fragment.NewsFragment">
+    tools:context="com.example.jason.test.Home.News.NewsFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/swipeRefreshLayout"
+        android:id="@+id/srNews"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 

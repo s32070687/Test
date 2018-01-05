@@ -1,11 +1,13 @@
 package com.example.jason.test.Home;
 
+import android.annotation.SuppressLint;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.util.Log;
 
-import com.example.jason.test.Home.Fragment.AlbumsFragment;
-import com.example.jason.test.Home.Fragment.NewsFragment;
+import com.example.jason.test.Home.Albums.AlbumsFragment;
+import com.example.jason.test.Home.News.NewsFragment;
 import com.example.jason.test.Home.VO.Page;
 
 import java.util.ArrayList;
@@ -17,10 +19,13 @@ import java.util.List;
 
 public class HomeTabItemFragmentPagerAdapter extends FragmentPagerAdapter {
 
+    //Log專用
+    private final static String TAG = "HomeTabItemFragmentPagerAdapter";
+
     List<Page> pageList;
 
+    @SuppressLint("LongLogTag")
     public HomeTabItemFragmentPagerAdapter(FragmentManager fm) {
-
         super(fm);
         pageList = new ArrayList<>();
         pageList.add(new Page(new NewsFragment(), "NewsList"));
