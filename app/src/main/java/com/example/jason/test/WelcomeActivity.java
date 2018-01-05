@@ -82,4 +82,41 @@ public class WelcomeActivity extends AppCompatActivity implements Animation.Anim
     public void onAnimationRepeat(Animation animation) {
 
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.d(TAG, "當Activity變得可見時調用該函數。");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d(TAG, "當Activity開始準備與用戶交互時調用該方法，即把保存的資料拿回來使用。");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.d(TAG, "當系統即將啟動另外一個Activity之前調用該方法，即把需要保存的資料保存。");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.d(TAG, "當前Activity變得不可見時調用該方法。");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d(TAG,"當前Activity被銷毀之前將會調用該方法，即通常都拿來把onCreate()時的資料做釋放的動作。");
+        finish();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.d(TAG, "當一個Activity再次啟動之前將會調用該方法。");
+    }
 }

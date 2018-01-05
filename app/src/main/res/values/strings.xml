@@ -13,5 +13,8 @@
     <string name="dialog_message_03">重新連線</string>
     <string name="dialog_message_04">取消</string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
     /*GetSever*/
 </resources>
