@@ -31,7 +31,7 @@ public class GetSeverActivity extends AppCompatActivity {
     //View元件
     private SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView rvSeverList;
-    private String SEVER_URL = "http://servers1.gogofinder.com.tw/api/app_serverlist.php";
+    private String SEVER_URL = "";
     private Dialog dialog;
 
     //Test
@@ -155,31 +155,32 @@ public class GetSeverActivity extends AppCompatActivity {
             dialog = ProgressDialog.show(GetSeverActivity.this,
                     "讀取中", "請等待...", true);
 
-            List<ServerList> serverLists = null;
-
-            try {
-                serverLists = new SeverGetAllTask().execute(SEVER_URL).get();
-
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            } catch (ExecutionException e) {
-                e.printStackTrace();
-            } catch (Exception e) {
-                Log.e(TAG, e.toString());
-            }
-
-            Log.d(TAG,"平台列表" + serverLists.toString());
-
-            if (serverLists == null || serverLists.isEmpty()) {
-                Log.d(TAG,"連線失敗 平台是空的");
-                dialog.dismiss();
-                NetWorkError();
-            }
-            else {
-                Log.d(TAG,"連線成功有拿到平台列表");
-                dialog.dismiss();
-                rvSeverList.setAdapter(new ShowSeverListAdapter(GetSeverActivity.this, testArray));
-            }
+            rvSeverList.setAdapter(new ShowSeverListAdapter(GetSeverActivity.this, testArray));
+//            List<ServerList> serverLists = null;
+//
+//            try {
+//                serverLists = new SeverGetAllTask().execute(SEVER_URL).get();
+//
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            } catch (ExecutionException e) {
+//                e.printStackTrace();
+//            } catch (Exception e) {
+//                Log.e(TAG, e.toString());
+//            }
+//
+//            Log.d(TAG,"平台列表" + serverLists.toString());
+//
+//            if (serverLists == null || serverLists.isEmpty()) {
+//                Log.d(TAG,"連線失敗 平台是空的");
+//                dialog.dismiss();
+//                NetWorkError();
+//            }
+//            else {
+//                Log.d(TAG,"連線成功有拿到平台列表");
+//                dialog.dismiss();
+//                rvSeverList.setAdapter(new ShowSeverListAdapter(GetSeverActivity.this, testArray));
+//            }
         }
         else {
             NetWorkError();
