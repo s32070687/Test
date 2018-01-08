@@ -8,9 +8,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.jason.test.Home.VO.TestData;
 import com.example.jason.test.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Jason on 2018/1/5.
@@ -24,13 +26,12 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.ViewHo
     //View
     private Context context;
     private LayoutInflater layoutInflater;
+    private List<TestData> testDataList;
 
-    //Test
-    private ArrayList<String> testArray;
-
-    public NewsListAdapter(Context context, ArrayList<String> testArray) {
+    public NewsListAdapter(Context context, List<TestData> testDataList) {
+        Log.d(TAG,"開始設定資料1");
         this.context =context;
-        this.testArray = testArray;
+        this.testDataList = testDataList;
         layoutInflater = LayoutInflater.from(context);
     }
 
@@ -42,20 +43,26 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(NewsListAdapter.ViewHolder holder, int position) {
-        holder.tvNewsTitle.setText(testArray.get(position));
+
+        Log.d(TAG,"開始設定資料");
+        holder.tvNewsTitle.setText(testDataList.get(position).getTitle());
+        holder.tvNewsContent.setText(testDataList.get(position).getContent());
+        holder.tvNewsAuthor.setText(testDataList.get(position).getAuthor());
     }
 
     @Override
     public int getItemCount() {
-        return testArray.size();
+        return testDataList.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView tvNewsTitle;
+        TextView tvNewsTitle,tvNewsContent,tvNewsAuthor;
         public ViewHolder(View itemView) {
             super(itemView);
             tvNewsTitle = (TextView) itemView.findViewById(R.id.tvNewsTitle);
+            tvNewsContent = (TextView) itemView.findViewById(R.id.tvNewsContent);
+            tvNewsAuthor = (TextView) itemView.findViewById(R.id.tvNewsAuthor);
         }
     }
 }

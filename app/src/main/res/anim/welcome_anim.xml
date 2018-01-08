@@ -7,7 +7,7 @@
 		android:toAlpha="1.0" />
 
 	<alpha
-		android:duration="2000"
+		android:duration="1000"
 		android:fromXDelta="1.0"
 		android:toAlpha="0.0" />
 

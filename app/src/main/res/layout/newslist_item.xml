@@ -3,20 +3,91 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_gravity="center"
-    card_view:cardBackgroundColor="#0080FF"
+    card_view:cardBackgroundColor="#d0d0d0"
     android:layout_margin="4dp"
     card_view:cardCornerRadius="6dp"
     card_view:cardElevation="6dp"
     android:layout_width="match_parent"
     android:layout_height="100dp">
 
-    <TextView
-        android:layout_gravity="center_horizontal|center_vertical"
-        android:textColor="#000000"
-        android:textStyle="bold"
-        android:id="@+id/tvNewsTitle"
-        android:textSize="20sp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:textColor="#000000"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="15dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="10dp"
+            android:text="標題:"
+            android:textSize="15sp"
+            android:id="@+id/textView" />
+
+        <TextView
+            android:textColor="#000000"
+            android:textStyle="bold"
+            android:layout_marginLeft="5dp"
+            android:textSize="15sp"
+            android:id="@+id/tvNewsTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/textView"
+            android:layout_toEndOf="@+id/textView"
+            android:layout_toRightOf="@+id/textView" />
+
+        <TextView
+            android:textColor="#000000"
+            android:textStyle="bold"
+            android:textSize="17sp"
+            android:id="@+id/tvContent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/textView"
+            android:layout_alignStart="@+id/textView"
+            android:layout_centerVertical="true"
+            android:text="內容:" />
+
+        <TextView
+            android:layout_marginLeft="5dp"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            android:textSize="17sp"
+            android:id="@+id/tvNewsContent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/tvContent"
+            android:layout_toEndOf="@+id/tvContent"
+            android:layout_toRightOf="@+id/tvContent" />
+
+        <TextView
+            android:layout_marginBottom="10dp"
+            android:id="@+id/tvAuthor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/tvContent"
+            android:layout_alignParentBottom="true"
+            android:layout_alignStart="@+id/tvContent"
+            android:text="作者:"
+            android:textColor="#000000"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_marginLeft="5dp"
+            android:textSize="15sp"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            android:id="@+id/tvNewsAuthor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/tvAuthor"
+            android:layout_toEndOf="@+id/tvAuthor"
+            android:layout_toRightOf="@+id/tvAuthor" />
+
+    </RelativeLayout>
 
 </android.support.v7.widget.CardView>

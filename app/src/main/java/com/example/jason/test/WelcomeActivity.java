@@ -10,9 +10,12 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
-import com.example.jason.test.GetSever.GetSeverActivity;
 import com.example.jason.test.Home.TabHomeActivity;
 import com.example.jason.test.Main.Common;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class WelcomeActivity extends AppCompatActivity implements Animation.AnimationListener {
 
@@ -54,6 +57,7 @@ public class WelcomeActivity extends AppCompatActivity implements Animation.Anim
 
         Log.d(TAG,Common.phoneWidth + "    不同解析度下的新螢幕寬");
         Log.d(TAG,Common.phoneHeight + "    不同解析度下的新螢幕高");
+
     }
 
     private void initView() {

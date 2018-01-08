@@ -3,10 +3,13 @@ package com.example.jason.test.Home.News;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.example.jason.test.GetSever.ServerList;
 import com.example.jason.test.Home.VO.TestData;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -55,7 +58,7 @@ public class NewsGetAllTask extends AsyncTask<Object, Integer, List<TestData>> {
         }
 
         Gson gson = new Gson();
-        Type listType = new TypeToken<List<ServerList>>() {
+        Type listType = new TypeToken<List<TestData>>() {
         }.getType();
 
         return gson.fromJson(jsonIn, listType);
@@ -65,24 +68,53 @@ public class NewsGetAllTask extends AsyncTask<Object, Integer, List<TestData>> {
 
         String jsonIn = "";
 
-        Request request = new Request.Builder()
-                .url(url)
-                .get()
-                .build();
+        Log.d(TAG,"任務名稱" + url);
 
-        try {
-            Response response = client.newCall(request).execute();
+        if(url.equals("TestTask")) {
 
-            if(response.isSuccessful()) {
-                jsonIn = response.body().string();
+            JSONArray JArray= new JSONArray();
+
+            JSONObject jsonObj;
+
+            for(int i = 0; i < 20; i++) {
+
+                jsonObj = new JSONObject();
+                try {
+                    jsonObj.put("title",i+"JasonTitle");
+                    jsonObj.put("author",i+"JasonAuthor");
+                    jsonObj.put("content",i+"JasonContent");
+                    jsonObj.put("date",i+"JasonDate");
+                    jsonObj.put("classify",i+"JasonClassify");
+
+                    JArray.put(jsonObj);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
-            else {
-                jsonIn = null;
-            }
 
-        } catch (IOException e) {
-            e.printStackTrace();
+            Log.d(TAG,"測試的JSON" +JArray);
+
+            jsonIn = JArray.toString();
         }
+//        Request request = new Request.Builder()
+//                .url(url)
+//                .get()
+//                .build();
+//
+//        try {
+//            Response response = client.newCall(request).execute();
+//
+//            if(response.isSuccessful()) {
+//                jsonIn = response.body().string();
+//            }
+//            else {
+//                jsonIn = null;
+//            }
+//
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
 
         Log.d(TAG, "jsonIn: " + jsonIn);
 

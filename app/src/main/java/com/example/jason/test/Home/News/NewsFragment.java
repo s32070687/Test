@@ -10,7 +10,6 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.helper.ItemTouchHelper;
@@ -19,13 +18,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.jason.test.GetSever.GetSeverActivity;
-import com.example.jason.test.GetSever.ShowSeverListAdapter;
+import com.example.jason.test.Home.VO.TestData;
 import com.example.jason.test.Main.Common;
 import com.example.jason.test.R;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -35,13 +35,11 @@ public class NewsFragment extends Fragment {
     //Log專用
     private final static String TAG = "NewsFragment";
 
-    //Test
-    private ArrayList<String> testArray = new ArrayList<>();
-
     //View
     private RecyclerView rvNewList;
     private SwipeRefreshLayout srNews;
     private Dialog dialog;
+    private List<TestData> testDataList = null;
 
     public NewsFragment() {
         // Required empty public constructor
@@ -53,39 +51,10 @@ public class NewsFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_news, container, false);
 
-        //Test
-        for(int i = 0; i < 50; i++){
-            if (i % 2 == 0) {
-                testArray.add("Albee");
-            } else {
-                testArray.add("Jason");
-            }
-        }
-
         initView(view);
         initData();
 
         return view;
-    }
-
-    private void initData() {
-
-        if (Common.networkConnected(getActivity())) {
-
-            Log.d(TAG,"網路正常開始連線");
-
-            dialog = ProgressDialog.show(getActivity(),
-                    this.getString(R.string.dialog_loading_01), this.getString(R.string.dialog_loading_02), true);
-
-            rvNewList.setAdapter(new NewsListAdapter(getActivity(), testArray));
-
-            dialog.dismiss();
-        }
-        else {
-            Log.d(TAG,"網路異常");
-            NetWorkError();
-        }
-
     }
 
     private void initView(View view) {
@@ -97,7 +66,7 @@ public class NewsFragment extends Fragment {
             @Override
             public void onRefresh() {
                 srNews.setRefreshing(true);
-//                GetSever();
+                initData();
                 srNews.setRefreshing(false);
             }
         });
@@ -113,11 +82,11 @@ public class NewsFragment extends Fragment {
                 if (fromPosition < toPosition) {
                     //所有Item交換
                     for (int i = fromPosition; i < toPosition; i++) {
-                        Collections.swap(testArray, i, i + 1);
+                        Collections.swap(testDataList, i, i + 1);
                     }
                 } else {
                     for (int i = fromPosition; i > toPosition; i--) {
-                        Collections.swap(testArray, i, i - 1);
+                        Collections.swap(testDataList, i, i - 1);
                     }
                 }
                 rvNewList.getAdapter().notifyItemMoved(fromPosition, toPosition);
@@ -165,6 +134,48 @@ public class NewsFragment extends Fragment {
         };
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(mCallback);
         itemTouchHelper.attachToRecyclerView(rvNewList);
+    }
+
+    private void initData() {
+
+        if (Common.networkConnected(getActivity())) {
+
+            Log.d(TAG,"網路正常開始連線");
+
+            dialog = ProgressDialog.show(getActivity(),
+                    this.getString(R.string.dialog_loading_01), this.getString(R.string.dialog_loading_02), true);
+
+            try {
+                testDataList = new NewsGetAllTask().execute("TestTask").get();
+
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                Log.e(TAG, e.toString());
+            }
+
+            Log.d(TAG,"平台列表" + testDataList.toString());
+
+            if (testDataList == null || testDataList.isEmpty()) {
+                Log.d(TAG,"數據是空的");
+                dialog.dismiss();
+                NetWorkError();
+            }
+            else {
+                Log.d(TAG,"連線成功有拿到平台列表");
+                dialog.dismiss();
+                Log.d(TAG,"連線成功有拿到平台列表" + testDataList);
+                rvNewList.setAdapter(new NewsListAdapter(getActivity(), testDataList));
+            }
+
+        }
+        else {
+            Log.d(TAG,"網路異常");
+            NetWorkError();
+        }
+
     }
 
     //網路有問題

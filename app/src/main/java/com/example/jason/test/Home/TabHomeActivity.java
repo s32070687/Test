@@ -1,13 +1,11 @@
 package com.example.jason.test.Home;
 
-import android.annotation.TargetApi;
-import android.os.Build;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.widget.TableLayout;
 
 import com.example.jason.test.R;
 
@@ -17,10 +15,10 @@ public class TabHomeActivity extends AppCompatActivity {
     private final static String TAG = "TabHomeActivity";
 
     //View元件
+    private Toolbar tbHome;
     private ViewPager vpHome;
     private TabLayout tlHome;
 
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,8 +29,12 @@ public class TabHomeActivity extends AppCompatActivity {
 
     private void initView() {
 
+        tbHome = (Toolbar) findViewById(R.id.tbHome);
         vpHome = (ViewPager)findViewById(R.id.vpHome);
         tlHome = (TabLayout) findViewById(R.id.tlHome);
+
+        tbHome.setTitle(R.string.app_name);
+        tbHome.setTitleTextColor(getResources().getColor(R.color.colorPrimaryDark));
 
         HomeTabItemFragmentPagerAdapter homeTabItemFragmentPagerAdapter =
                 new  HomeTabItemFragmentPagerAdapter(getSupportFragmentManager());
