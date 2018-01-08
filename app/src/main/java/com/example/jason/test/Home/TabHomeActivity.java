@@ -18,6 +18,7 @@ public class TabHomeActivity extends AppCompatActivity {
     private Toolbar tbHome;
     private ViewPager vpHome;
     private TabLayout tlHome;
+    private int[] IconResID = {R.drawable.home_tab_select_01,R.drawable.home_tab_select_02};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +44,10 @@ public class TabHomeActivity extends AppCompatActivity {
 
         vpHome.setOffscreenPageLimit(0);
         tlHome.setupWithViewPager(vpHome);
+
+        for(int i =0; i < IconResID.length;i++){
+            tlHome.getTabAt(i).setIcon(IconResID[i]);
+        }
     }
 
     @Override

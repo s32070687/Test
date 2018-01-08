@@ -1,6 +1,10 @@
 package com.example.jason.test;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -31,14 +35,12 @@ public class WelcomeActivity extends AppCompatActivity implements Animation.Anim
         setContentView(R.layout.activity_welcome);
 
         initSetting();
-
         initView();
     }
 
     private void initSetting() {
 
-        //取消ActonBar
-        getSupportActionBar().hide();
+//        getSupportActionBar().hide();
 
         //取消狀態欄
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
@@ -63,12 +65,13 @@ public class WelcomeActivity extends AppCompatActivity implements Animation.Anim
     private void initView() {
 
         ivLogo = (ImageView)findViewById(R.id.ivLogo);
-
+        //設定動畫
         Animation animation = AnimationUtils.loadAnimation(this, R.anim.welcome_anim);
         animation.setFillEnabled(true);
         animation.setFillAfter(true);
         animation.setAnimationListener(this);
         ivLogo.setAnimation(animation);
+
     }
 
     @Override
@@ -79,8 +82,22 @@ public class WelcomeActivity extends AppCompatActivity implements Animation.Anim
     @Override
     public void onAnimationEnd(Animation animation) {
         //動畫結束
-        startActivity(new Intent(WelcomeActivity.this,TabHomeActivity.class));
-        finish();
+
+        //權限
+        int permission = ActivityCompat.checkSelfPermission(this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE);
+
+        if (permission != PackageManager.PERMISSION_GRANTED) {
+            //未取得權限，向使用者要求允許權限
+            Log.d(TAG, "未取得權限，向使用者要求允許權限。");
+            String[] permissions = {Manifest.permission.READ_EXTERNAL_STORAGE};
+            Common.askPermissions(this, permissions, Common.PERMISSION_READ_EXTERNAL_STORAGE);
+        }else{
+            //已有權限，可進行檔案存取
+            Log.d(TAG, "已有權限，可進行檔案存取");
+            startActivity(new Intent(WelcomeActivity.this,TabHomeActivity.class));
+            finish();
+        }
     }
 
     @Override
@@ -92,6 +109,25 @@ public class WelcomeActivity extends AppCompatActivity implements Animation.Anim
     protected void onStart() {
         super.onStart();
         Log.d(TAG, "當Activity變得可見時調用該函數。");
+
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case Common.PERMISSION_READ_EXTERNAL_STORAGE:
+                if (grantResults.length > 0 &&
+                        grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Log.d(TAG,"答應了");
+                    startActivity(new Intent(WelcomeActivity.this,TabHomeActivity.class));
+                    finish();
+                } else {
+                    Log.d(TAG,"不答應");
+                }
+                break;
+        }
     }
 
     @Override

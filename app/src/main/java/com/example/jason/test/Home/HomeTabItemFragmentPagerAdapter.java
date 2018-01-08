@@ -30,6 +30,9 @@ public class HomeTabItemFragmentPagerAdapter extends FragmentPagerAdapter {
         pageList = new ArrayList<>();
         pageList.add(new Page(new NewsFragment(), "NewsList"));
         pageList.add(new Page(new AlbumsFragment(), "ImageList"));
+//        pageList.add(new Page(new AlbumsFragment(), "ImageList"));
+//        pageList.add(new Page(new AlbumsFragment(), "ImageList"));
+//        pageList.add(new Page(new AlbumsFragment(), "ImageList"));
     }
 
     @Override
