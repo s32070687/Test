@@ -3,10 +3,10 @@ package com.example.jason.test;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.WindowManager;
@@ -16,10 +16,6 @@ import android.widget.ImageView;
 
 import com.example.jason.test.Home.TabHomeActivity;
 import com.example.jason.test.Main.Common;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 public class WelcomeActivity extends AppCompatActivity implements Animation.AnimationListener {
 

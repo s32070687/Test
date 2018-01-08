@@ -11,7 +11,6 @@ import android.widget.TextView;
 import com.example.jason.test.Home.VO.TestData;
 import com.example.jason.test.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
