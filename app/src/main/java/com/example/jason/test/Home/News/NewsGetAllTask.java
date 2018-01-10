@@ -24,7 +24,6 @@ import okhttp3.OkHttpClient;
 
 public class NewsGetAllTask extends AsyncTask<Object, Integer, List<TestData>> {
 
-    //
     //OKHttp
     private OkHttpClient client = new OkHttpClient();
 

@@ -48,7 +48,6 @@ public class ImagesListAdapter extends RecyclerView.Adapter<ImagesListAdapter.Vi
         return new ImagesListAdapter.ViewHolder(itemView);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     public void onBindViewHolder(ImagesListAdapter.ViewHolder holder, int position) {
 

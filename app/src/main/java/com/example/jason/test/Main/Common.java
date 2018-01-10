@@ -36,7 +36,6 @@ public class Common {
     public static int phoneHeight;
 
     //權限
-
     public static final int PERMISSION_READ_EXTERNAL_STORAGE = 0;
 
     public static void askPermissions(Activity activity, String[] permissions, int requestCode) {
