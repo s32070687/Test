@@ -18,6 +18,8 @@ import java.util.Set;
 
 public class Common {
 
+    //API
+    public static String WEATHER_URL = "https://works.ioa.tw/weather/api/all.json";
     //判斷設備網路連線
     public static boolean networkConnected(Activity activity) {
         ConnectivityManager conManager =
@@ -53,4 +55,5 @@ public class Common {
                     requestCode);
         }
     }
+
 }

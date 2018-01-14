@@ -7,7 +7,6 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
@@ -15,7 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.jason.test.Home.VO.TestData;
+import com.example.jason.test.Home.VO.Weather;
 import com.example.jason.test.Main.Common;
 import com.example.jason.test.R;
 
@@ -25,18 +24,18 @@ import java.util.concurrent.ExecutionException;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class NewsFragment extends Fragment {
+public class WeatherFragment extends Fragment {
 
     //Log專用
-    private final static String TAG = "NewsFragment";
+    private final static String TAG = "WeatherFragment";
 
     //View
-    private RecyclerView rvNewList;
-    private SwipeRefreshLayout srNews;
+    private RecyclerView rvWeatherList;
+//    private SwipeRefreshLayout srNews;
     private Dialog dialog;
-    private List<TestData> testDataList = null;
+    private List<Weather> weatherList = null;
 
-    public NewsFragment() {
+    public WeatherFragment() {
         // Required empty public constructor
     }
 
@@ -44,7 +43,7 @@ public class NewsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_news, container, false);
+        View view = inflater.inflate(R.layout.fragment_weather, container, false);
 
         initView(view);
         initData();
@@ -56,19 +55,19 @@ public class NewsFragment extends Fragment {
 
     private void initView(View view) {
 
-        rvNewList = (RecyclerView) view.findViewById(R.id.rvNewList);
-        srNews = (SwipeRefreshLayout) view.findViewById(R.id.srNews);
+        rvWeatherList = (RecyclerView) view.findViewById(R.id.rvWeatherList);
+//        srNews = (SwipeRefreshLayout) view.findViewById(R.id.srNews);
+//
+//        srNews.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+//            @Override
+//            public void onRefresh() {
+//                srNews.setRefreshing(true);
+//                initData();
+//                srNews.setRefreshing(false);
+//            }
+//        });
 
-        srNews.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                srNews.setRefreshing(true);
-                initData();
-                srNews.setRefreshing(false);
-            }
-        });
-
-        rvNewList.setLayoutManager(new StaggeredGridLayoutManager(
+        rvWeatherList.setLayoutManager(new StaggeredGridLayoutManager(
                 1, StaggeredGridLayoutManager.VERTICAL));
 
     }
@@ -83,7 +82,7 @@ public class NewsFragment extends Fragment {
                      this.getString(R.string.dialog_loading_02), true);
 
             try {
-                testDataList = new NewsGetAllTask().execute("TestTask").get();
+                weatherList = new WeatherGetAllTask().execute(Common.WEATHER_URL).get();
 
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -93,17 +92,17 @@ public class NewsFragment extends Fragment {
                 e.printStackTrace();
             }
 
-            Log.d(TAG,"平台列表" + testDataList.toString());
+            Log.d(TAG,"平台列表" + weatherList.toString());
 
-            if (testDataList == null || testDataList.isEmpty()) {
+            if (weatherList == null || weatherList.isEmpty()) {
                 dialog.dismiss();
                 Log.d(TAG,"數據是空的");
                 NetWorkError();
             }
             else {
                 dialog.dismiss();
-                Log.d(TAG,"連線成功有拿到平台列表");
-                rvNewList.setAdapter(new NewsListAdapter(getActivity(), testDataList));
+                Log.d(TAG,"連線成功有拿到縣市列表");
+                rvWeatherList.setAdapter(new WeatherListAdapter(getActivity(), weatherList));
             }
 
         }

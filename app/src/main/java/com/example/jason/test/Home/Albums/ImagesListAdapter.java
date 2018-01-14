@@ -28,7 +28,7 @@ import java.util.List;
 public class ImagesListAdapter extends RecyclerView.Adapter<ImagesListAdapter.ViewHolder> {
 
     //Log專用
-    private final static String TAG = "NewsListAdapter";
+    private final static String TAG = "WeatherListAdapter";
 
     //View
     private Context context;
@@ -51,7 +51,7 @@ public class ImagesListAdapter extends RecyclerView.Adapter<ImagesListAdapter.Vi
     @Override
     public void onBindViewHolder(ImagesListAdapter.ViewHolder holder, int position) {
 
-        holder.rlAlbums.setLayoutParams(new GridView.LayoutParams(Common.phoneWidth/3,Common.phoneWidth/3));
+//        holder.rlAlbums.setLayoutParams(new GridView.LayoutParams(Common.phoneWidth/3,Common.phoneWidth/3));
         Uri uri = Uri.parse("file://" + imageList.get(position).getPath());
 
         Glide.with(context).load(uri)

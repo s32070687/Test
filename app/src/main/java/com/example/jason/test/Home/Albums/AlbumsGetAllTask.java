@@ -11,6 +11,7 @@ import com.example.jason.test.Home.VO.Image;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -74,6 +75,7 @@ public class AlbumsGetAllTask extends AsyncTask<Object, Integer, List<Image>> {
             e.printStackTrace();
         }
 
+        Collections.reverse(images);
         Log.d(TAG,"抓取圖片"+ images.size());
 
         return images;

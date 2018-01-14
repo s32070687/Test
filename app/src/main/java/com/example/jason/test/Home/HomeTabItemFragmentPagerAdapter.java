@@ -6,7 +6,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import com.example.jason.test.Home.Albums.AlbumsFragment;
-import com.example.jason.test.Home.News.NewsFragment;
+import com.example.jason.test.Home.News.WeatherFragment;
 import com.example.jason.test.Home.VO.Page;
 
 import java.util.ArrayList;
@@ -27,7 +27,7 @@ public class HomeTabItemFragmentPagerAdapter extends FragmentPagerAdapter {
     public HomeTabItemFragmentPagerAdapter(FragmentManager fm) {
         super(fm);
         pageList = new ArrayList<>();
-        pageList.add(new Page(new NewsFragment(), "NewsList"));
+        pageList.add(new Page(new WeatherFragment(), "NewsList"));
         pageList.add(new Page(new AlbumsFragment(), "ImageList"));
 //        pageList.add(new Page(new AlbumsFragment(), "ImageList"));
 //        pageList.add(new Page(new AlbumsFragment(), "ImageList"));

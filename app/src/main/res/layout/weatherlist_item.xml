@@ -23,7 +23,7 @@
             android:layout_marginLeft="15dp"
             android:layout_marginStart="15dp"
             android:layout_marginTop="10dp"
-            android:text="標題:"
+            android:text="縣市:"
             android:textSize="15sp"
             android:id="@+id/textView" />
 
@@ -32,7 +32,7 @@
             android:textStyle="bold"
             android:layout_marginLeft="5dp"
             android:textSize="15sp"
-            android:id="@+id/tvNewsTitle"
+            android:id="@+id/tvCity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/textView"
@@ -40,38 +40,14 @@
             android:layout_toRightOf="@+id/textView" />
 
         <TextView
-            android:textColor="#000000"
-            android:textStyle="bold"
-            android:textSize="17sp"
-            android:id="@+id/tvContent"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/textView"
-            android:layout_alignStart="@+id/textView"
-            android:layout_centerVertical="true"
-            android:text="內容:" />
-
-        <TextView
-            android:layout_marginLeft="5dp"
-            android:textColor="#000000"
-            android:textStyle="bold"
-            android:textSize="17sp"
-            android:id="@+id/tvNewsContent"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/tvContent"
-            android:layout_toEndOf="@+id/tvContent"
-            android:layout_toRightOf="@+id/tvContent" />
-
-        <TextView
-            android:layout_marginBottom="10dp"
             android:id="@+id/tvAuthor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/tvContent"
+            android:layout_marginLeft="15dp"
+            android:layout_marginStart="15dp"
             android:layout_alignParentBottom="true"
-            android:layout_alignStart="@+id/tvContent"
-            android:text="作者:"
+            android:layout_marginBottom="10dp"
+            android:text="鄉鎮:"
             android:textColor="#000000"
             android:textSize="15sp"
             android:textStyle="bold" />
@@ -81,7 +57,7 @@
             android:textSize="15sp"
             android:textColor="#000000"
             android:textStyle="bold"
-            android:id="@+id/tvNewsAuthor"
+            android:id="@+id/tvTowns"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/tvAuthor"
